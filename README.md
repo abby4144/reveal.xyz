@@ -1,2 +1,2 @@
-# reveal.github.io
+# reveal
 Reveals Website!
