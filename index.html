@@ -2,117 +2,755 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Bot | Discord Bot</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reveal, Your Discord, Elevated.</title>
+<meta name="description" content="Powerful Discord security, verification, moderation and fun commands in one bot.">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b0b10;
-            color: white;
-            text-align: center;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-        header {
-            padding: 25px;
-            background: #111116;
-        }
+:root {
+    --bg: #08070d;
+    --card: #100e19;
+    --purple: #9255ff;
+    --light: #bd9aff;
+    --text: #ffffff;
+    --muted: #9691a5;
+    --border: rgba(255,255,255,.08);
+}
 
-        header h2 {
-            color: #a855f7;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .hero {
-            padding: 120px 20px;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .hero h1 {
-            font-size: 50px;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
 
-        .hero span {
-            color: #a855f7;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    width: 700px;
+    height: 700px;
+    background: #742aff;
+    filter: blur(180px);
+    opacity: .13;
+    border-radius: 50%;
+    top: -400px;
+    left: 25%;
+    pointer-events: none;
+    z-index: -1;
+}
 
-        .hero p {
-            color: #b9b9c5;
-            font-size: 18px;
-        }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        .button {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px 30px;
-            background: #9333ea;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-        }
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
 
-        .features {
-            padding: 60px 20px;
-            background: #111116;
-        }
+/* NAVIGATION */
 
-        .feature {
-            display: inline-block;
-            background: #1b1b24;
-            padding: 25px;
-            margin: 10px;
-            border-radius: 15px;
-            width: 250px;
-        }
+nav {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, 94%);
+    height: 72px;
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15,13,23,.82);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    z-index: 100;
+}
 
-        footer {
-            padding: 30px;
-            color: #777;
-        }
-    </style>
+.logo {
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--purple);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 13px;
+    color: #b5b0c3;
+    transition: .2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-button {
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: var(--purple);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .25s;
+}
+
+.nav-button:hover {
+    background: #a778ff;
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 25px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 790px;
+    padding: 210px 20px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-glow {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    background: var(--purple);
+    filter: blur(150px);
+    opacity: .17;
+    left: 50%;
+    top: 250px;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 16px;
+    border: 1px solid rgba(161,112,255,.3);
+    border-radius: 50px;
+    background: rgba(146,85,255,.09);
+    color: #c8aaff;
+    font-size: 12px;
+    margin-bottom: 28px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #9e6aff;
+    box-shadow: 0 0 12px #9255ff;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 90px);
+    font-weight: 900;
+    letter-spacing: -5px;
+    line-height: 1.05;
+    max-width: 950px;
+    margin: auto;
+}
+
+.gradient {
+    background: linear-gradient(100deg,#ffffff 10%,#b990ff 50%,#9255ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    max-width: 620px;
+    margin: 28px auto;
+    line-height: 1.8;
+    font-size: 16px;
+    color: var(--muted);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 35px;
+}
+
+.primary-btn, .secondary-btn {
+    padding: 16px 25px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: .25s;
+}
+
+.primary-btn {
+    background: linear-gradient(120deg,#a16bff,#7435db);
+    box-shadow: 0 0 35px rgba(146,85,255,.25);
+}
+
+.primary-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 45px rgba(146,85,255,.45);
+}
+
+.secondary-btn {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+}
+
+.secondary-btn:hover {
+    background: rgba(255,255,255,.09);
+    transform: translateY(-3px);
+}
+
+/* PREVIEW */
+
+.preview {
+    max-width: 850px;
+    margin: 20px auto 0;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    background: rgba(255,255,255,.035);
+    box-shadow: 0 30px 100px rgba(0,0,0,.5);
+}
+
+.preview-inner {
+    background: #0d0b13;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: left;
+}
+
+.window-dots {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 25px;
+}
+
+.window-dots i {
+    width: 9px;
+    height: 9px;
+    background: #554c65;
+    border-radius: 50%;
+}
+
+.discord-message {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.bot-avatar {
+    min-width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: linear-gradient(135deg,#a16bff,#5425a7);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+}
+
+.message-content strong {
+    font-size: 14px;
+}
+
+.bot-tag {
+    font-size: 9px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    background: #8051dc;
+    margin-left: 5px;
+}
+
+.message-content p {
+    color: #b9b3c7;
+    font-size: 13px;
+    margin-top: 10px;
+    line-height: 1.7;
+}
+
+.fake-command {
+    display: inline-block;
+    background: #1b1629;
+    border: 1px solid #38275b;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #c7a8ff;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+/* GENERAL SECTIONS */
+
+section.content-section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 110px 25px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-heading h2 {
+    font-size: clamp(30px,5vw,45px);
+    letter-spacing: -2px;
+    font-weight: 800;
+}
+
+.section-heading p {
+    color: var(--muted);
+    margin-top: 15px;
+    line-height: 1.7;
+}
+
+/* FEATURES */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.feature-card {
+    background: linear-gradient(145deg,#15111f,#0d0b13);
+    border: 1px solid var(--border);
+    padding: 30px;
+    border-radius: 17px;
+    transition: .3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(146,85,255,.55);
+    box-shadow: 0 15px 45px rgba(100,50,180,.1);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: rgba(146,85,255,.13);
+    font-size: 23px;
+    margin-bottom: 25px;
+}
+
+.feature-card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* COMMANDS */
+
+.commands-box {
+    background: linear-gradient(140deg,#171225,#0e0c15);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.commands-box h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.commands-box p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.command-list {
+    display: grid;
+    gap: 12px;
+}
+
+.command {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.command code {
+    color: #c39dff;
+    font-size: 13px;
+}
+
+.command span {
+    color: #9691a5;
+    font-size: 12px;
+}
+
+/* CTA */
+
+.cta {
+    max-width: 1050px;
+    margin: 70px auto 110px;
+    padding: 75px 25px;
+    text-align: center;
+    border: 1px solid rgba(146,85,255,.25);
+    border-radius: 25px;
+    background:
+    radial-gradient(ellipse at 50% 100%,rgba(146,85,255,.25),transparent 65%),
+    #110d1a;
+}
+
+.cta h2 {
+    font-size: clamp(30px,5vw,45px);
+    letter-spacing: -2px;
+}
+
+.cta p {
+    color: var(--muted);
+    margin: 18px auto 30px;
+    max-width: 500px;
+    line-height: 1.8;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 35px 6%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer strong {
+    color: white;
+}
+
+/* ANIMATIONS */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media(max-width:750px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        padding: 25px;
+        flex-direction: column;
+        background: #100d18;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 180px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .commands-box {
+        grid-template-columns: 1fr;
+    }
+
+    .cta {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h2>Reveal</h2>
-</header>
+<nav>
+    <a href="#" class="logo">BOT<span>NAME.</span></a>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#security">Security</a>
+        <a href="https://discord.gg/UzhYadEUdC">Support</a>
+    </div>
+
+    <a href="https://discord.gg/UzhYadEUdC" class="nav-button">Add to Discord ↗</a>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</nav>
+
+<main>
 
 <section class="hero">
-    <h1>Meet <span>Reveal</span></h1>
-    <p>Security, verification, and fun. All in one Discord bot.</p>
+    <div class="hero-glow"></div>
 
-    <a href="https://discord.com/oauth2/authorize?client_id=1559971020717170739&permissions=1099780072454&integration_type=0&scope=bot+applications.commands" class="button">
-        Add to Discord
-    </a>
+    <div class="pill">
+        <span class="dot"></span>
+        YOUR DISCORD EXPERIENCE, UPGRADED
+    </div>
 
-    <a href="https://discord.gg/UzhYadEUdC" class="button">
-        Support Server
+    <h1>
+        One bot.<br>
+        <span class="gradient">Endless possibilities.</span>
+    </h1>
+
+    <p>
+        Give your Discord server the protection, verification,
+        and entertainment it deserves. Everything you need,
+        all in one powerful bot.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="https://discord.gg/UzhYadEUdC" class="primary-btn">✦ Add to Discord</a>
+        <a href="https://discord.gg/UzhYadEUdC" class="secondary-btn">Join Support Server ↗</a>
+    </div>
+
+    <div class="preview reveal">
+        <div class="preview-inner">
+            <div class="window-dots">
+                <i></i><i></i><i></i>
+            </div>
+
+            <div class="discord-message">
+                <div class="bot-avatar">B</div>
+                <div class="message-content">
+                    <strong>Reveal</strong>
+                    <span class="bot-tag">APP</span>
+                    <p>
+                        Welcome! I'm here to make your Discord
+                        server safer and more entertaining.
+                    </p>
+                    <div class="fake-command">/help</div>
+                    <div class="fake-command">/verify</div>
+                    <div class="fake-command">/security</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section" id="features">
+    <div class="section-heading reveal">
+        <h2>Everything in <span class="gradient">one place.</span></h2>
+        <p>Powerful tools designed to make your community better.</p>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-card reveal" id="security">
+            <div class="feature-icon">🛡️</div>
+            <h3>Advanced Security</h3>
+            <p>
+                Protect your community with moderation
+                and security tools designed to help keep
+                unwanted activity under control.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🔐</div>
+            <h3>Smart Verification</h3>
+            <p>
+                Give new members a verification process
+                that helps your server stay organized
+                and protected.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🎮</div>
+            <h3>Fun Commands</h3>
+            <p>
+                Keep your members entertained with
+                interactive commands, games, and
+                fun experiences.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">⚙️</div>
+            <h3>Easy to Use</h3>
+            <p>
+                Simple commands and helpful tools
+                make managing your server easier.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🤖</div>
+            <h3>Smart Automation</h3>
+            <p>
+                Make everyday server tasks easier
+                with useful automated features.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">✨</div>
+            <h3>Always Improving</h3>
+            <p>
+                New ideas, improvements, and features
+                help make the experience even better.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="content-section" id="commands">
+    <div class="commands-box reveal">
+        <div>
+            <div class="pill">COMMAND CENTER</div>
+            <h2>Powerful commands.<br><span class="gradient">Simple experience.</span></h2>
+            <p>
+                From server protection to fun interactions,
+                access useful tools directly through Discord.
+                Explore what the bot has to offer.
+            </p>
+            <br>
+            <a href="https://discord.com/channels/1566487414166261910/1566487786268262491" class="primary-btn">
+                Explore Commands ↗
+            </a>
+        </div>
+
+        <div class="command-list">
+            <div class="command">
+                <code>/help</code>
+                <span>View commands</span>
+            </div>
+            <div class="command">
+                <code>/verify</code>
+                <span>Verification</span>
+            </div>
+            <div class="command">
+                <code>/security</code>
+                <span>Security tools</span>
+            </div>
+            <div class="command">
+                <code>/fun</code>
+                <span>Entertainment</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta reveal">
+    <div class="pill">GET STARTED TODAY</div>
+    <h2>Your server deserves <span class="gradient">better.</span></h2>
+    <p>
+        Bring security, verification, and entertainment
+        together. Invite the bot and upgrade your community.
+    </p>
+    <a href="https://discord.gg/UzhYadEUdC" class="primary-btn">
+        Add to Discord ↗
     </a>
 </section>
 
-<section class="features">
-    <h1>Everything Your Server Needs</h1>
-
-    <div class="feature">
-        <h2>Security</h2>
-        <p>Powerful tools to keep your server protected.</p>
-    </div>
-
-    <div class="feature">
-        <h2>Verification</h2>
-        <p>Keep unwanted bots out with secure verification.</p>
-    </div>
-
-    <div class="feature">
-        <h2>Fun Commands</h2>
-        <p>Enjoy games, memes, and entertaining commands.</p>
-    </div>
-</section>
+</main>
 
 <footer>
-    © 2026 Reveal. All rights reserved.
+    <div><strong>Reveal.</strong> © 2026 All rights reserved.</div>
+    <div>
+        <a href="https://discord.gg/UzhYadEUdC">Support</a>
+        &nbsp; • &nbsp;
+        <a href="https://www.shopify.com/tools/policy-generator/show/D6jwNB6NEW0t--n7ipmbyhKrcbodzq--C+NqpO9hpPz4z4q3nN+ZqQ==.pdf">Privacy</a>
+        &nbsp; • &nbsp;
+        <a href="https://www.shopify.com/tools/policy-generator/show/bop6c6BusgKo--xoCLLs+LZFGI5+ZF--jp2n6Utyje%2FRqJCqS67iVw==.pdf">Terms</a>
+    </div>
 </footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("open");
+}
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
+</script>
 
 </body>
 </html>
